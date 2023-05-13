@@ -63,6 +63,7 @@ $shareTech: 'Share Tech Mono', monospace;
   flex-wrap: wrap;
   flex: 1 0 25%;
   height: 325px;
+  position: relative;
 }
 
 .buttons-container div {
@@ -107,6 +108,9 @@ $shareTech: 'Share Tech Mono', monospace;
 }
 
 #equals {
-  // height: 40%;
+  height: 40%;
+  position: absolute;
   flex-grow: 1;
+  bottom: 0;
+  right: 0;
 }
