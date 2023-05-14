@@ -10,7 +10,7 @@ function App () {
     evaluated: false
   })
 
-  const handleClick = (e) => {
+  const handleNumberInput = (e) => {
     const symbol = e.target.innerText
     if (symbol === '0' && value.currentOperand === '0') {
       return value
@@ -122,8 +122,6 @@ function App () {
       }
     })
   }
-
-  console.log(value)
   return (
     <div className="app">
       <div className='calculator-container'>
@@ -139,19 +137,19 @@ function App () {
           <div id="clear" onClick={handleClear}>AC</div>
           <div id="divide" onClick={handleOperator}>/</div>
           <div id="multiply" onClick={handleOperator}>x</div>
-          <div id="seven" onClick={handleClick}>7</div>
-          <div id="eight" onClick={handleClick}>8</div>
-          <div id="nine" onClick={handleClick}>9</div>
+          <div id="seven" onClick={handleNumberInput}>7</div>
+          <div id="eight" onClick={handleNumberInput}>8</div>
+          <div id="nine" onClick={handleNumberInput}>9</div>
           <div id="subtract" onClick={handleOperator}>-</div>
-          <div id="four" onClick={handleClick}>4</div>
-          <div id="five" onClick={handleClick}>5</div>
-          <div id="six" onClick={handleClick}>6</div>
+          <div id="four" onClick={handleNumberInput}>4</div>
+          <div id="five" onClick={handleNumberInput}>5</div>
+          <div id="six" onClick={handleNumberInput}>6</div>
           <div id="add" onClick={handleOperator}>+</div>
-          <div id="one" onClick={handleClick}>1</div>
-          <div id="two" onClick={handleClick}>2</div>
-          <div id="three" onClick={handleClick}>3</div>
+          <div id="one" onClick={handleNumberInput}>1</div>
+          <div id="two" onClick={handleNumberInput}>2</div>
+          <div id="three" onClick={handleNumberInput}>3</div>
           <div id="equals" onClick={getResult}>=</div>
-          <div id="zero" onClick={handleClick}>0</div>
+          <div id="zero" onClick={handleNumberInput}>0</div>
           <div id="decimal" onClick={handleDecimal}>.</div>
         </div>
       </div>
