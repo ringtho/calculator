@@ -2,39 +2,58 @@ import React, { useState } from 'react'
 import * as math from 'mathjs'
 
 function App () {
-  const [value, setValue] = useState([])
+  const [equals, setEquals] = useState(false)
+  const [value, setValue] = useState({
+    currentOperand: [],
+    previousOperand: '',
+    result: 0
+  })
 
   const handleClick = (item) => {
+    setEquals(false)
     setValue(prev => {
-      return [...prev, item]
+      return {
+        ...prev,
+        operations: [...prev.operations, item]
+      }
     })
   }
 
   const handleClear = () => {
-    setValue([])
+    setEquals(false)
+    setValue({ operations: [], result: 0 })
   }
 
   const getResult = () => {
-    let result = value.join('')
+    setEquals(true)
+    let result = value.operations.join('')
     if (result) {
       result = math.evaluate(result)
       result = math.format(result, { precision: 14 })
-      result = String(result)
-      setValue([result])
+      // result = String(result)
+      setValue(prev => {
+        return {
+          ...prev,
+          result
+        }
+      })
     }
   }
 
-  console.log(value)
+  const displayContent = value.operations.length < 1 ? 0 : value.operations
+
   console.log(value)
   return (
     <div className="app">
       <div className='calculator-container'>
         <div className='display-section'>
           <div className='formular-screen'>
-          {value}
+          {value.operations}
           </div>
           <div id="display" className='working-screen'>
-            {value.length === 0 ? 0 : value}
+            { !equals ? displayContent : value.result}
+            {/* { value.operations.length < 1 ? 0 : value.operations} */}
+            {/* { equals && value.result } */}
           </div>
         </div>
         <div className='buttons-container'>
