@@ -62,13 +62,43 @@ function App () {
     if (operator === 'x') {
       operator = '*'
     }
-    setValue(prev => {
-      return {
-        ...prev,
-        currentOperand: operator,
-        formula: prev.formula + operator
-      }
-    })
+    if (value.evaluated) {
+      setValue(prev => {
+        return {
+          ...prev,
+          currentOperand: operator,
+          formula: prev.result + operator,
+          evaluated: false
+        }
+      })
+    } else if (!isNaN(value.formula.slice(-1))) {
+      setValue(prev => {
+        return {
+          ...prev,
+          result: prev.formula,
+          currentOperand: operator,
+          formula: prev.formula + operator
+        }
+      })
+    } else if (operator === '-') {
+      setValue(prev => {
+        return {
+          ...prev,
+          currentOperand: operator,
+          formula: prev.formula + operator
+        }
+      })
+    } else if (operator === '*' ||
+    operator === '/' ||
+    operator === '+') {
+      setValue(prev => {
+        return {
+          ...prev,
+          currentOperand: operator,
+          formula: prev.result + operator
+        }
+      })
+    }
   }
 
   const handleClear = () => {
@@ -86,11 +116,11 @@ function App () {
     setValue(prev => {
       return {
         ...prev,
+        currentOperand: result,
         evaluated: true,
         result
       }
     })
-    console.log(result)
   }
 
   console.log(value)
@@ -102,7 +132,7 @@ function App () {
           {value.formula}
           </div>
           <div id="display" className='working-screen'>
-            {!value.evaluated ? value.currentOperand : value.result }
+            { value.currentOperand }
           </div>
         </div>
         <div className='buttons-container'>
